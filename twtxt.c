@@ -255,17 +255,13 @@ int main(int argc, char *argv[]) {
                         char* style5 = "%4d-%2d-%2dT%2d:%2d:%2d.%6dZ\t%[^\n]"; /* yyyy-mm-ddThh:mm:ss.msZ\tTEXT */
 
                         /* Regex would probably be easier to handle here, but adds additional dependencies on some platforms. */
-                        if (sscanf(output, style1, &year, &month, &day, &hour, &min, &sec, &tzh, &tzm, tweet) != 9) {
-                            if (sscanf(output, style2, &year, &month, &day, &hour, &min, &sec, &dummy, &tzh, &tzm, tweet) != 10) {
-                                if (sscanf(output, style3, &year, &month, &day, &hour, &min, &sec, tweet) != 7) {
-                                    if (sscanf(output, style4, &year, &month, &day, &hour, &min, &sec, &dummy, tweet) != 8) {
-                                        if (sscanf(output, style5, &year, &month, &day, &hour, &min, &sec, &dummy, tweet) != 8) {
+                        if (sscanf(output, style1, &year, &month, &day, &hour, &min, &sec, &tzh, &tzm, tweet) != 9 &&
+                            sscanf(output, style2, &year, &month, &day, &hour, &min, &sec, &dummy, &tzh, &tzm, tweet) != 10 &&
+                            sscanf(output, style3, &year, &month, &day, &hour, &min, &sec, tweet) != 7 &&
+                            sscanf(output, style4, &year, &month, &day, &hour, &min, &sec, &dummy, tweet) != 8 &&
+                            sscanf(output, style5, &year, &month, &day, &hour, &min, &sec, &dummy, tweet) != 8) {
                                             /* Not a valid twtxt tweet. */
                                             continue;
-                                        }
-                                    }
-                                }
-                            }
                         }
 
                         /* Filter out time trolls: */
@@ -300,7 +296,7 @@ int main(int argc, char *argv[]) {
                         strncpy(ptr[iAllTweets].username, followingIter->string, 50);
                         strncpy(ptr[iAllTweets].text, tweet, 512);
 #endif
-                       iAllTweets++;
+                        iAllTweets++;
 
                         /* Add space for more tweets: */
                         tweet_t *tmp_ptr;
