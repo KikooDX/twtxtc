@@ -283,41 +283,6 @@ int main(int argc, char *argv[]) {
                             iLongestNickname = strlen(followingIter->string);
                         }
 
-                        /* Mentions to someone else than me are against the, uhm, law or so. */
-                        char mention[100];
-                        char url[256];
-                        char mentiontext[500];
-                        char initialtext[500];
-
-                        if (sscanf(tweet, "@<%s %[^>]> %s", mention, url, mentiontext) == 3) {
-                            if (strncmp(mention, getConfigValue("nickname", ""), strlen(mention)) != 0) {
-                                /* Nope, not me. */
-                                continue;
-                            }
-                            else {
-                                /* Reformat. */
-                                char newtweet[500];
-                                sprintf(newtweet, "@%s %s", mention, mentiontext);
-#ifdef _MSC_VER
-                                strcpy_s(tweet, sizeof(tweet), newtweet);
-#else
-                                strncpy(tweet, newtweet, sizeof(tweet));
-#endif
-                            }
-                        }
-
-                        /* Reformat inline mentions as well: */
-                        if (sscanf(tweet, "%[^@] @<%s %[^>]> %s", initialtext, mention, url, mentiontext) == 4) {
-                            /* Reformat. */
-                            char newtweet[500];
-                            sprintf(newtweet, "%s @%s %s", initialtext, mention, mentiontext);
-#ifdef _MSC_VER
-                            strcpy_s(tweet, sizeof(tweet), newtweet);
-#else
-                            strncpy(tweet, newtweet, sizeof(tweet));
-#endif
-                        }
-
                         struct tm tweettime = {
                             .tm_year = year - 1900,
                             .tm_mon = month - 1,
