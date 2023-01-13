@@ -335,7 +335,7 @@ int main(int argc, char *argv[]) {
 
             int i = 0; /* loop variable */
             int j = 0; /* limiter to maxVal */
-            for (i = iAllTweets; i >= 0, j <= maxVal; --i, ++j) {
+            for (i = 0; i < iAllTweets && j <= maxVal; i++, j++) {
                 /* Print the newest tweets (user<spacing>tweet). */
                 if (strlen(ptr[i].username) > iLongestNickname) {
                     /* Faulty line. */
