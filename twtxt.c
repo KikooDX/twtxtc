@@ -353,7 +353,7 @@ int main(int argc, char *argv[]) {
                 saved_attributes = consoleInfo.wAttributes;
 
                 SetConsoleTextAttribute(hConsole, 14); /* 14 = yellow because wtf */
-                printf("@%*s", (int) iLongestNickname, ptr[i].username);
+                printf("%*s", (int) iLongestNickname, ptr[i].username);
 
                 /* Restore the original values. */
                 SetConsoleTextAttribute(hConsole, saved_attributes);
@@ -369,7 +369,7 @@ int main(int argc, char *argv[]) {
 #define YELLOW "\x1B[33m" /* lol */
 #define WHITE  "\x1B[37m" /* actually ... */
 #define RESET  "\x1B[0m"  /* WHY?! */
-                printf(YELLOW "@%*s" RESET "%s" WHITE "%s\n" RESET, (int) iLongestNickname, ptr[i].username, spacing, ptr[i].text);
+                printf(YELLOW "%*s" RESET "%s" WHITE "%s\n" RESET, (int) iLongestNickname, ptr[i].username, spacing, ptr[i].text);
 # endif
 #endif
             }
